@@ -6,7 +6,7 @@ Welcome to the Semantic Toolhub GitHub repository! We aim to find the right sema
 It also is the data basis for the paper **Semantic Tool Hub: Towards A Sustainable Community-Driven Documentation of Semantic Web Tools** by Achim Reiz, Fajar J. Ekaputra, and Nandana Mihindukulasooriya. The paper is currently under review.
 
 ## TLDR
-The Semantic Toolhub is a community-driven repository to help knowledge engineers and developers find and document the right semantic web tools. It uses a taxonomy to describe the tool's capabilities and allows easy contribution through a (form-based)[https://docs.google.com/forms/d/e/1FAIpQLSfDoLRg7J-9hM0pvNgFsfcZ9EEkgoXROWg_TPsW42oUcNF2kw/viewform] approach or by editing Wikidata.
+The Semantic Toolhub is a community-driven repository to help knowledge engineers and developers find and document the right semantic web tools. It uses a taxonomy to describe the tool's capabilities and allows easy contribution through a [form-based](https://docs.google.com/forms/d/e/1FAIpQLSfDoLRg7J-9hM0pvNgFsfcZ9EEkgoXROWg_TPsW42oUcNF2kw/viewform) approach or by editing Wikidata.
 
 Why Bother?
 -----------
