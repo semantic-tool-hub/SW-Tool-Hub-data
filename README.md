@@ -18,7 +18,8 @@ The Taxonomy
 
 The taxonomy is the basis for describing the tool's capabilities. The taxonomy is structured using WikiDatas SubClassOf hierarchy ([P279](https://www.wikidata.org/wiki/Property:P279)) and itself a subclass of software engineering ([Q638608](https://www.wikidata.org/wiki/Q638608)).
 
-![grafik](https://github.com/semantic-tool-hub/SW-Tool-Hub-data/assets/12608619/4b5f9dd7-6a7f-4cf3-a760-5b890aae250f)
+![figure-taxonomy](https://github.com/semantic-tool-hub/SW-Tool-Hub-data/assets/12608619/d3162a64-fed2-492b-a6a9-4d65ad5f0e69)
+
 
 It is built on the [OntoCommons Report D4.3](https://ontocommons.eu/deliverables) and the [semantic web lifecycle](https://doi.org/10.1007/978-3-031-14343-4_33) by Breit et al.
 
