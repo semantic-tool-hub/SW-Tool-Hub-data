@@ -17,7 +17,7 @@ git_access_token = os.getenv("github_token")
 header = {"Authorization": f"BEARER {git_access_token}"}
 resp = requests.get("https://api.github.com/rate_limit", headers=header)
 rate = json.loads(resp.content)["resources"]["core"]
-print(f"rate_limit: {rate["remaining"]}/{rate["limit"]}")
+print(f'rate_limit: {rate["remaining"]}/{rate["limit"]}')
 
 
 def create_git_api(git_repo): return "https://api.github.com/repos/" + \
