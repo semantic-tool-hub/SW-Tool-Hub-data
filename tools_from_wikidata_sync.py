@@ -9,19 +9,19 @@ endpoint_url = "https://query.wikidata.org/sparql"
 # SPARQL query
 tools_query = """
 SELECT DISTINCT ?tool ?toolLabel ?description ?genreLabel ?website
-                (group_concat(DISTINCT ?classLabel; SEPARATOR=", ") as ?classification)
-                (group_concat(DISTINCT ?licenseELabel; SEPARATOR=", ") as ?license) 
-                (group_concat(DISTINCT ?programmingLangLabel; SEPARATOR=", ") as ?programming_language) 
-                (group_concat(DISTINCT ?sourceRepo; SEPARATOR=", ") as ?source_repos) 
-                ?update 
-                (group_concat(DISTINCT ?sourceLabel; SEPARATOR=", ") as ?sources) WHERE {
+                (group_concat(DISTINCT ?classLabel; SEPARATOR="; ") as ?classification)
+                (group_concat(DISTINCT ?licenseELabel; SEPARATOR="; ") as ?license) 
+                (group_concat(DISTINCT ?programmingLangLabel; SEPARATOR="; ") as ?programming_language) 
+                (group_concat(DISTINCT ?sourceRepo; SEPARATOR="; ") as ?source_repos) 
+                (MAX(?last_update ) AS ?update)
+                (group_concat(DISTINCT ?sourceLabel; SEPARATOR="; ") as ?sources) WHERE {
   ?class wdt:P279 wd:Q124614077.
   _:subClasses (wdt:P279*) ?class.
   ?tool wdt:P366 _:subClasses ;
         wdt:P136 ?genre ;
         OPTIONAL { ?tool wdt:P275 ?licenseE . ?licenseE rdfs:label ?licenseELabel . FILTER(lang(?licenseELabel) = "en") }
         OPTIONAL { ?tool schema:description? ?description . FILTER(lang(?description) = "en") }
-        OPTIONAL { ?tool wdt:P5017 ?update }
+        OPTIONAL { ?tool wdt:P5017 ?last_update }
         OPTIONAL { ?tool wdt:P277 ?programmingLang . ?programmingLang rdfs:label ?programmingLangLabel . FILTER(lang(?programmingLangLabel) = "en")}
         OPTIONAL { ?tool wdt:P1324 ?sourceRepo }
         OPTIONAL { ?tool wdt:P856 ?website}
