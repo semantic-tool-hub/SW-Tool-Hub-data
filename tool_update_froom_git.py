@@ -38,4 +38,4 @@ for tool_data in tool_data_array:
                 tool_data["license"] = git_metadata["license"]["key"]
 
 with open("tools_from_wikidata_w_gitupdate.jsonl", 'w') as file:
-    file.write(str.join("\n", [json.dumps(e) for e in tool_data_array]))
+    file.write(str.join("\n", [json.dumps(e, separators=(",",":")) for e in tool_data_array]))
