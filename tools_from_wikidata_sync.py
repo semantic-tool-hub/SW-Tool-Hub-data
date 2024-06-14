@@ -8,30 +8,33 @@ endpoint_url = "https://query.wikidata.org/sparql"
 
 # SPARQL query
 tools_query = """
-SELECT DISTINCT ?tool ?toolLabel ?description ?genreLabel ?website
+SELECT DISTINCT ?tool ?toolLabel ?description ?genreLabel 
+                (group_concat(DISTINCT ?website_raw; SEPARATOR="; ") as ?website)
                 (group_concat(DISTINCT ?classLabel; SEPARATOR="; ") as ?classification)
                 (group_concat(DISTINCT ?licenseELabel; SEPARATOR="; ") as ?license) 
                 (group_concat(DISTINCT ?programmingLangLabel; SEPARATOR="; ") as ?programming_language) 
                 (group_concat(DISTINCT ?sourceRepo; SEPARATOR="; ") as ?source_repos) 
                 (MAX(?last_update ) AS ?update)
-                (group_concat(DISTINCT ?sourceLabel; SEPARATOR="; ") as ?sources) WHERE {
+                (group_concat(DISTINCT ?sourceLabel; SEPARATOR="; ") as ?sources)
+               (group_concat(DISTINCT ?beforesubClassLabel; SEPARATOR="; ") as ?s) 
+WHERE {
   ?class wdt:P279 wd:Q124614077.
-  _:subClasses (wdt:P279*) ?class.
-  ?tool wdt:P366 _:subClasses ;
+  ?subClasses (wdt:P279*) ?class.
+  ?tool wdt:P366 ?subClasses ;
         wdt:P136 ?genre ;
         OPTIONAL { ?tool wdt:P275 ?licenseE . ?licenseE rdfs:label ?licenseELabel . FILTER(lang(?licenseELabel) = "en") }
         OPTIONAL { ?tool schema:description? ?description . FILTER(lang(?description) = "en") }
         OPTIONAL { ?tool wdt:P5017 ?last_update }
         OPTIONAL { ?tool wdt:P277 ?programmingLang . ?programmingLang rdfs:label ?programmingLangLabel . FILTER(lang(?programmingLangLabel) = "en")}
         OPTIONAL { ?tool wdt:P1324 ?sourceRepo }
-        OPTIONAL { ?tool wdt:P856 ?website}
-        OPTIONAL { ?tool wdt:P1343 ?source . ?source rdfs:label ?sourceLabel .   FILTER(lang(?sourceLabel) = "en")  }
-  
-  ?class rdfs:label ?classLabel .
+        OPTIONAL { ?tool wdt:P856 ?website_raw}
+        OPTIONAL { ?tool wdt:P1343 ?source . ?source rdfs:label ?sourceLabel .   FILTER(lang(?sourceLabel) = "en")  }  
+                   
+  ?subClasses rdfs:label ?classLabel .
   FILTER(lang(?classLabel) = "en")              
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
-GROUP BY ?tool ?toolLabel ?description ?genreLabel ?website ?update 
+GROUP BY ?tool ?toolLabel ?description ?genreLabel ?update 
 ORDER BY ?tool
 """
 
